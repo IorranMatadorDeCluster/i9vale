@@ -47,4 +47,4 @@ HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
   CMD node dist/index.js || exit 1
 
 # Start the application
-CMD ["node", "dist/index.js"] 
+CMD ["npm", "run", "start"] 
