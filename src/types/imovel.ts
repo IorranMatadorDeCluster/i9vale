@@ -49,6 +49,7 @@ export interface Imovel {
   corretor: Corretor;
   PublicaValores: string;
   PrecoVenda: string;
+  PrecoAluguel?: string;
   PrecoMedioM2Venda: string;
   PrecoCondominio: string;
   AreaUtil: string;
@@ -70,10 +71,12 @@ export interface Imovel {
   ArmarioAreaServico: string;
   PisoLaminado: string;
   QtdDormitorios: string;
+  QtdSuites?: string;
   QtdBanheiros: string;
   QtdSalas: string;
   QtdVagasDescobertas: string;
   QtdVagas: string;
+  QtdVagasCobertas?: string;
   QtdAndar: string;
   AnoConstrucao: string;
   Observacao: string;
@@ -86,6 +89,9 @@ export interface Imovel {
   AreaServico: string;
   Interfone: string;
   Exclusividade: string;
+  Mobiliado?: string;
+  ArCondicionado?: string;
+  Elevador?: string;
   Fotos: {
     Foto: Foto[];
   };

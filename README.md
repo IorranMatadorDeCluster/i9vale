@@ -50,6 +50,45 @@ Retrieves all real estate properties from the external API.
 }
 ```
 
+### GET `/imoveis-sql`
+Retrieves SQL INSERT statements for all properties to insert into the `imoveis_vale` database table.
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": [
+    "INSERT INTO \"public\".\"imoveis_vale\" (\"codigo_imovel\", \"finalidade\", \"tipo_imovel\", \"cidade\", \"tipo_oferta\", \"preco_venda\", \"preco_aluguel\", \"qtd_dormitorios\", \"qtd_suites\", \"area_util\", \"bairro\", \"qtd_vagas_cobertas\", \"qtd_banheiros\", \"padrao_imovel\", \"padrao_localizacao\", \"ano_construcao\", \"mobiliado\", \"ar_condicionado\", \"piscina\", \"elevador\", \"estado\", \"endereco\", \"titulo_imovel\", \"preco_condominio\", \"observacoes\", \"ativo\", \"data_cadastro\", \"data_atualizacao\", \"url_site\") VALUES ('AP4801', 'Residencial', 'Apartamento', 'São José dos Campos', 'Venda', 350000, NULL, 2, NULL, 57, 'Vila Cardoso', NULL, 1, NULL, NULL, 2016, false, false, true, false, 'SP', 'Rua Itororó, 571, 64B    (sol manhã), Vila Cardoso, São José dos Campos, SP, CEP: 12216783', 'Apartamento à Venda, 2 dormitórios, 57 m² - Vila Cardoso - SJCampos/SP', 645, 'Apartamento a Venda ou Locação 02 dormitórios no Residencial Golden Park...', true, '2025-08-24', '2025-08-27 18:41:14', 'https://www.i9vale.com.br/imovel-detalhes.aspx?ref=AP4801');"
+  ],
+  "count": 1,
+  "timestamp": "2025-01-27T18:41:14.000Z"
+}
+```
+
+### POST `/db-sync`
+Synchronizes the database with external API data. Fetches all properties from the external API and performs insert/update/delete operations to keep the database in sync.
+
+**Request:**
+```bash
+curl -X POST http://localhost:3000/db-sync
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {
+    "success": true,
+    "added": 15,
+    "updated": 1890,
+    "deleted": 10,
+    "errors": [],
+    "timestamp": "2025-01-27T18:41:14.000Z"
+  },
+  "timestamp": "2025-01-27T18:41:14.000Z"
+}
+```
+
 ### GET `/health`
 Application health check endpoint.
 
@@ -138,6 +177,7 @@ docker-compose up -d
 |----------|-------------|---------|
 | `PORT` | Server port | `3000` |
 | `ALLOWED_ORIGINS` | CORS allowed origins (comma-separated) | `*` |
+| `DATABASE_URL` | PostgreSQL connection string | `postgres://postgres:3089abbe6d0aad9c7e18@n8n_postgres:5432/n8n?sslmode=disable` |
 
 ## Project Structure
 
@@ -206,6 +246,7 @@ To test the API:
 - `xml2js`: XML to JSON parsing
 - `cors`: Cross-origin resource sharing
 - `helmet`: Security middleware
+- `pg`: PostgreSQL client for database operations
 
 ### Development
 - `typescript`: TypeScript compiler

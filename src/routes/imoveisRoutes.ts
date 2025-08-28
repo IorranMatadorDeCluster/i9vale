@@ -21,6 +21,12 @@ export class ImoveisRoutes {
     // GET /imoveis/health - Health check endpoint
     this.router.get('/health', (req, res) => this.imoveisController.healthCheck(req, res));
 
+    // GET /imoveis-sql - Get SQL INSERT statements
+    this.router.get('/sql', (req, res) => this.imoveisController.getImoveisSql(req, res));
+
+    // POST /db-sync - Synchronize database
+    this.router.post('/db-sync', (req, res) => this.imoveisController.syncDatabase(req, res));
+
     // 404 handler for undefined routes under /imoveis
     this.router.use('*', (req, res) => {
       res.status(404).json({
