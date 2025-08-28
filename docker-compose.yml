@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  imoveis-api:
+    build: .
+    container_name: imoveis-api
+    ports:
+      - "80:80"
+    environment:
+      - PORT=80
+      - ALLOWED_ORIGINS=*
+      - NODE_ENV=production
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - imoveis-network
+
+networks:
+  imoveis-network:
+    driver: bridge 
